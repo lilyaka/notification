@@ -1,0 +1,33 @@
+type Query {
+    notifications(pageable: Pageable): NotificationConnection
+}
+
+type Mutation {
+    markAllAsRead: Boolean
+    markAsRead(id: String!): Boolean
+    deleteNotification(id: String!): Boolean
+}
+
+type Notification {
+    id: String,
+    userId: String,
+    title: String,
+    content: String,
+    time: DateTime,
+    module: String,
+    function: String,
+    read: Boolean,
+    new: Boolean
+    fromUserId: String
+}
+
+type NotificationConnection {
+    totalCount: Int!
+    pageInfo: PageInfo!
+    edges: [NotificationEdge]
+}
+
+type NotificationEdge {
+    cursor: String!
+    node: Notification
+}
